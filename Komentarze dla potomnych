@@ -1,0 +1,138 @@
+// Inicjalizacja dwóch liczb całkowitych
+int number1 = 3;
+int number2 = 4;
+
+// Wykonanie różnych operacji matematycznych na liczbach
+PerformOperation(number1, number2, Add);
+PerformOperation(number1, number2, subtract);
+PerformOperation(number1, number2, multiply);
+PerformOperation(number1, number2, divide);
+
+// Tworzenie i inicjalizacja dwóch tablic
+int[] list1 = new int[2];
+int[] list2 = new int[2];
+list1[0] = number1; // Przypisanie number1 do pierwszego elementu list1
+list1[1] = number2; // Przypisanie number2 do drugiego elementu list1
+list2[0] = number1 + number2 + number2; // Obliczenie i przypisanie wartości do pierwszego elementu list2
+list2[1] = number1 + number2 + number1; // Obliczenie i przypisanie wartości do drugiego elementu list2
+
+// Filtracja tablic według różnych warunków
+FilterNumber(list1, even); // Sprawdzenie, czy wszystkie liczby w list1 są parzyste
+FilterNumber(list2, even); // Sprawdzenie, czy wszystkie liczby w list2 są parzyste
+FilterNumber(list1, biggerthan10); // Sprawdzenie, czy wszystkie liczby w list1 są większe niż 10
+FilterNumber(list2, biggerthan10); // Sprawdzenie, czy wszystkie liczby w list2 są większe niż 10
+FilterNumber(list1, lessthan0); // Sprawdzenie, czy wszystkie liczby w list1 są mniejsze niż 0
+FilterNumber(list2, lessthan0); // Sprawdzenie, czy wszystkie liczby w list2 są mniejsze niż 0
+
+// Mapowanie wartości w tablicach przy użyciu różnych transformacji
+Map(list1, square); // Przekształcenie elementów list1 do kwadratów
+Map(list2, doubling); // Podwojenie elementów w list2
+Map(list2, minus1); // Zmniejszenie elementów w list2 o 1
+
+// Funkcja dodająca dwie liczby
+int Add(int a, int b)
+{
+    return a + b;
+}
+
+// Funkcja odejmująca dwie liczby
+int subtract(int a, int b)
+{
+    return a - b;
+}
+
+// Funkcja mnożąca dwie liczby
+int multiply(int a, int b)
+{
+    return a * b;
+}
+
+// Funkcja dzieląca dwie liczby
+int divide(int a, int b)
+{
+    return a / b; // dzielenie liczb
+}
+
+// Funkcja wykonująca operację matematyczną na dwóch liczbach
+void PerformOperation(int a, int b, MathOperation operation)
+{
+    int result = operation(a, b); // Wywołanie przekazanej operacji
+    Console.WriteLine("The result is " + result); // Wydrukowanie wyniku
+}
+
+// Funkcja sprawdzająca, czy wszystkie liczby w tablicy są parzyste
+bool even(int[] list)
+{
+    foreach (int i in list) // Iteracja przez każdy element listy
+    {
+        if (i % 2 != 0) // Jeśli napotkano nieparzystą liczbę
+        {
+            return false; // Zwróć fałsz
+        }
+    }
+    return true; // Zwróć prawdę, jeśli wszystkie liczby są parzyste
+}
+
+// Funkcja sprawdzająca, czy wszystkie liczby w tablicy są większe niż 10
+bool biggerthan10(int[] list)
+{
+    foreach (int i in list)
+    {
+        if (i < 10) // Jeśli napotkano liczbę mniejszą niż 10
+        {
+            return false; // Zwróć fałsz
+        }
+    }
+    return true; // Zwróć prawdę, jeśli wszystkie liczby są większe niż 10
+}
+
+// Funkcja sprawdzająca, czy wszystkie liczby w tablicy są mniejsze niż 0
+bool lessthan0(int[] list)
+{
+    foreach (int i in list)
+    {
+        if (i > 0) // Jeśli napotkano liczbę większą niż 0
+        {
+            return false; // Zwróć fałsz
+        }
+    }
+    return true; // Zwróć prawdę, jeśli wszystkie liczby są mniejsze niż 0
+}
+
+// Funkcja przekształcająca liczbę do jej kwadratu
+int square(int a)
+{
+    return a * a;
+}
+
+// Funkcja przekształcająca liczbę do jej podwojonej wartości
+int doubling(int a)
+{
+    return a * 2;
+}
+
+// Funkcja zmniejszająca liczbę o 1
+int minus1(int a)
+{
+    return a - 1;
+}
+
+// Funkcja mapująca transformację na tablicy
+void Map(int[] list, Transform transform)
+{
+    int[] result = new int[list.Length]; // Tablica wynikowa
+    for (int temp = 0; temp < list.Length; temp++)
+    {
+        result[temp] = transform(list[temp]); // Przekształcenie każdego elementu
+    }
+    Console.WriteLine("Transformed list: "); // Wydrukowanie przekształconej tablicy
+    foreach (int i in result)
+    {
+        Console.WriteLine(i); // Wydrukowanie każdego elementu przekształconej tablicy
+    }
+}
+
+// Deklaracje delegatów
+delegate bool Filter(int[] a); // Typ delegatu dla filtrów
+delegate int MathOperation(int a, int b); // Typ delegatu dla operacji matematycznych
+delegate int Transform(int a); // Typ delegatu dla transformacji
